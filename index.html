@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinaleira com Contagem</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+        body {
+            background-image: linear-gradient(45deg, blue, white);
+        }
+
+        #semaforo {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            background-color: black;
+            border-radius: 20px;
+            padding: 10px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            gap: 1rem;
+            padding: 20px;
+        }
+
+        .lamp {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-top: 5px;
+            border-radius: 60px;
+        }
+
+        #red {
+            background-color: rgb(42, 25, 25);
+        }
+
+        #yellow {
+            background-color: rgb(48, 48, 30);
+        }
+
+        #green {
+            background-color: rgb(23, 36, 23);
+        }
+
+        .tela {
+            display: flex;
+            justify-content: center;
+            background-color: rgb(2, 33, 0);
+            width: 400px;
+            height: 400px;
+            border-radius: 15px;
+        }
+
+        .cont {
+            margin: 0;
+            font-size: 300px;
+            color: rgb(9, 233, 1);
+            font-family: 'Black Ops One', cursive;
+        }
+
+    </style>
+
+    </style>
+
+</head>
+<body>
+
+    <div id="semaforo">
+        <div>
+            <div class="lamp" id="red"></div>
+            <div class="lamp" id="yellow"></div>
+            <div class="lamp" id="green"></div>
+        </div>
+
+        <div class="tela">
+            <p class="cont"></p>
+        </div>
+
+    </div>
+
+
+
+
+    <script>
+
+        function contagem(a) {
+            var valor = a;
+
+            setInterval(function(){
+                if (valor > 0) { 
+                    valor = valor - 1
+                    document.querySelector('.cont').innerHTML = valor;               
+                }
+        }, 1000)
+        }
+
+
+        function red() {
+            contagem(15)
+            var cor = document.getElementById('red');
+            cor.style.backgroundColor ='red';
+
+            setTimeout(function(){
+                cor.style.backgroundColor = 'rgb(42, 25, 25)';
+                green()
+            }, 15000)
+        }
+
+
+       function yellow() {
+            contagem(5)
+            var cor = document.getElementById('yellow');
+
+            var apagar = setInterval(function(){
+                cor.style.backgroundColor = 'yellow' 
+                setTimeout(function(){
+                    cor.style.backgroundColor = 'rgb(48, 48, 30)'
+                }, 500)
+           
+        }, 1000)
+
+            setTimeout(function(){
+                clearInterval(apagar)
+                cor.style.backgroundColor = 'rgb(48, 48, 30)';
+                red()
+            }, 5000)
+       }
+
+
+        function green() {
+            contagem(10)
+            var cor = document.getElementById('green');
+            cor.style.backgroundColor = 'rgb(64, 255, 0)';
+
+            setTimeout(function(){
+                cor.style.backgroundColor = 'rgb(23, 36, 23)';
+                yellow()
+            }, 10000)
+        }
+
+        green()
+
+        
+    </script>
+
+</body>
+</html>
